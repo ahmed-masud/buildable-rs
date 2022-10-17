@@ -12,7 +12,7 @@ pub trait Buildable {
     type Builder: Default;
 
     /// Build Errors.
-    type Error: std::error::Error;
+    type BuilderError: std::error::Error;
 
     /// Provide a builder for this concrete type.
     fn builder() -> Self::Builder {
@@ -20,7 +20,7 @@ pub trait Buildable {
     }
 
     /// Build from the builder.
-    fn build(builder: Self::Builder) -> Result<Self, Self::Error>
+    fn build(builder: Self::Builder) -> Result<Self, Self::BuilderError>
     where
         Self: Sized;
 }
